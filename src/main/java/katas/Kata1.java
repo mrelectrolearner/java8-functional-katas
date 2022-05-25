@@ -19,9 +19,11 @@ import java.util.stream.Collectors;
 public class Kata1 {
     public static List<Map> execute() {
         List<Movie> movies = DataUtil.getMovies();
-        List<Map> list=movies.stream().map(movie -> {
-            return Map.of("id", movie.getId().toString(), "title",movie.getTitle().toString());
-        }).collect(Collectors.toList());
+        List<Map> list=movies
+                .stream()
+                .map(movie -> {
+                    return Map.of("id", movie.getId().toString(), "title",movie.getTitle().toString());})
+                .collect(Collectors.toList());
 
         return list;
     }
