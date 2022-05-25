@@ -22,7 +22,8 @@ public class Kata1 {
         List<Map> list=movies
                 .stream()
                 .map(movie -> {
-                    return Map.of("id", movie.getId().toString(), "title",movie.getTitle().toString());})
+                    return Map.of("id", movie.getId().toString(),
+                            "title",movie.getTitle().toString());})
                 .collect(Collectors.toList());
 
         return list;
