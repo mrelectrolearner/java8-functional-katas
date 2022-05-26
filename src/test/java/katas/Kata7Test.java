@@ -3,6 +3,8 @@ package katas;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.stream.Collectors;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -10,6 +12,6 @@ public class Kata7Test {
 
     @Test
     public void testExecute() {
-        Assert.assertThat(Kata7.execute(), equalTo(4));
+        Assert.assertThat(Kata7.execute().size(), equalTo(4));
     }
 }
