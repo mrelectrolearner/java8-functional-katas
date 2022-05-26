@@ -1,12 +1,10 @@
 package katas;
 
-import com.google.common.collect.ImmutableList;
+
+import com.google.common.collect.ImmutableMap;
 import model.Movie;
 import util.DataUtil;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,7 +20,7 @@ public class Kata1 {
         List<Map> list=movies
                 .stream()
                 .map(movie -> {
-                    return Map.of("id", movie.getId().toString(),
+                    return ImmutableMap.of("id", movie.getId().toString(),
                             "title",movie.getTitle().toString());})
                 .collect(Collectors.toList());
 

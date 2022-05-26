@@ -1,5 +1,6 @@
 package katas;
 
+import com.google.common.collect.ImmutableMap;
 import util.DataUtil;
 
 import java.util.List;
@@ -57,7 +58,7 @@ public class Kata10 {
 
         return lists.stream().map(list-> {
             Stream<Map> videosOfTheList = videos.stream().filter(video -> video.get("listId").equals(list.get("id")));
-            return Map.of("name",
+            return ImmutableMap.of("name",
                     list.get("name"),
                     "video",
                     videosOfTheList

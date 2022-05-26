@@ -29,7 +29,7 @@ public class Kata9 {
                 .flatMap(movieList -> movieList.getVideos().stream())
                 .map(movie -> {
                     int middle = 1;
-                    return Map.of("id", movie.getId(),
+                    return ImmutableMap.of("id", movie.getId(),
                             "title", movie.getTitle(),
                             "time", movie.getInterestingMoments().get(middle).getTime(),
                             "url", movie.getBoxarts().stream().reduce(smallestBoxArt).orElseThrow());

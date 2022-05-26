@@ -25,7 +25,7 @@ public class Kata8 {
 
 
         BiFunction<Movie, Bookmark, Map<String, String>> movieBookmarkMapBiFunction = (movie, bookMark) -> {
-            return Map.of("videoId", movie.getId().toString(), "bookmarkId", bookMark.getId().toString());
+            return ImmutableMap.of("videoId", movie.getId().toString(), "bookmarkId", bookMark.getId().toString());
         };
         return StreamUtils
                  .zip(movies.stream(),bookMarks.stream(), movieBookmarkMapBiFunction).collect(Collectors.toList());

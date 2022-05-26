@@ -26,7 +26,7 @@ public class Kata7 {
         };
         return movieLists.stream()
                 .flatMap(movieList -> movieList.getVideos().stream())
-                .map(movie -> Map.of("id", movie.getId(),
+                .map(movie -> ImmutableMap.of("id", movie.getId(),
                         "title", movie.getTitle(),
                         "boxart",movie.getBoxarts().stream().reduce(smallestBoxArt)))
                 .collect(Collectors.toList());

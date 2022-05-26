@@ -1,5 +1,6 @@
 package katas;
 
+import com.google.common.collect.ImmutableMap;
 import util.DataUtil;
 
 import java.util.List;
@@ -71,7 +72,7 @@ public class Kata11 {
 
             var videoOBject= geVideoObjectInformation(boxArts, bookmarkList, videosOfTheList);
 
-            return Map.of("name", list.get("name"),
+            return ImmutableMap.of("name", list.get("name"),
                     "video",videoOBject
                     );
         }).collect(Collectors.toList());
