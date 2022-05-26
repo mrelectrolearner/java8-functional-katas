@@ -1,14 +1,14 @@
 package katas;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import util.DataUtil;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /*
-    Goal: Create a datastructure from the given data:
+    Goal: Create a data structure from the given data:
 
     This time we have 4 seperate arrays each containing lists, videos, boxarts, and bookmarks respectively.
     Each object has a parent id, indicating its parent.
@@ -63,8 +63,40 @@ public class Kata11 {
         List<Map> boxArts = DataUtil.getBoxArts();
         List<Map> bookmarkList = DataUtil.getBookmarkList();
 
-        return ImmutableList.of(ImmutableMap.of("name", "someName", "videos", ImmutableList.of(
-                ImmutableMap.of("id", 5, "title", "The Chamber", "time", 123, "boxart", "someUrl")
-        )));
+
+        return lists.stream().map(list-> {
+            Stream<Map> videosOfTheList = videos
+                    .stream()
+                    .filter(video -> video.get("listId").equals(list.get("id")));
+
+            var videoOBject= geVideoObjectInformation(boxArts, bookmarkList, videosOfTheList);
+
+            return Map.of("name", list.get("name"),
+                    "video",videoOBject
+                    );
+        }).collect(Collectors.toList());
+
+    }
+
+    private static List<Map<String, Object>> geVideoObjectInformation(List<Map> boxArts, List<Map> bookmarkList, Stream<Map> videosOfTheList) {
+        return videosOfTheList
+                .map(video -> {
+                    var boxArtsVideoElement = getElementOfTheVideo(boxArts, video);
+
+                    var bookmarkVideoElement = getElementOfTheVideo(bookmarkList, video);
+
+                    return Map.of("id", video.get("id"),
+                            "title", video.get("title"),
+                            "boxArt", boxArtsVideoElement.get("url"),
+                            "time", bookmarkVideoElement.get("time"));
+                }).collect(Collectors.toList());
+    }
+
+    private static Map getElementOfTheVideo(List<Map> ListOfElements, Map video) {
+        return ListOfElements
+                .stream()
+                .filter(bookMark -> bookMark.get("videoId").equals(video.get("id")))
+                .findFirst()
+                .orElseThrow();
     }
 }
